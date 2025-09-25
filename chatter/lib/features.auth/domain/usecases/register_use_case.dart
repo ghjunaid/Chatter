@@ -1,5 +1,5 @@
-import 'package:chatter/features/domain/entities/user_entity.dart';
-import 'package:chatter/features/domain/repositories/auth_repository.dart';
+import 'package:chatter/features.auth/domain/entities/user_entity.dart';
+import 'package:chatter/features.auth/domain/repositories/auth_repository.dart';
 
 class RegisterUseCase {
   final AuthRepository repository;
