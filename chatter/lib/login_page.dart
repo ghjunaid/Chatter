@@ -70,6 +70,7 @@ class _LoginPageState extends State<LoginPage> {
             child: TextField(
               controller: controller,
               obscureText: isPassword,
+              cursorColor: Colors.grey,
               decoration: InputDecoration(
                 hintText: hint,
                 hintStyle: TextStyle(color: Colors.grey),
