@@ -2,11 +2,11 @@ import 'package:chatter/features.auth/domain/entities/user_entity.dart';
 
 class UserModel extends UserEntity {
   UserModel({
-    required super.id,
-    required super.username,
-    required super.email,
-    super.token,
-  });
+    required String id,
+    required String username,
+    required String email,
+    required String token,
+  }) : super(id: id, username: username, email: email, token: token);
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
     return UserModel(

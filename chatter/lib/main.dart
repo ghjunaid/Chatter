@@ -38,10 +38,11 @@ class MyApp extends StatelessWidget {
         title: 'Flutter Demo',
         theme: AppTheme.darkTheme,
         debugShowCheckedModeBanner: false,
-        home: RegisterPage(),
+        home: LoginPage(),
         routes: {
           '/login': (_) => LoginPage(),
           '/register': (_) => RegisterPage(),
+          '/message': (_) => MessagePage(),
         },
       ),
     );

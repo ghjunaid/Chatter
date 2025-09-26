@@ -16,7 +16,7 @@ class AuthRemoteDataSource {
       headers: {'Content-Type': 'application/json'},
     );
 
-    return UserModel.fromJson(jsonDecode(response.body));
+    return UserModel.fromJson(jsonDecode(response.body)['user']);
   }
 
   Future<UserModel> register({

@@ -1,8 +1,12 @@
+import 'package:chatter/features.auth/presentation/bloc/auth_bloc.dart';
+import 'package:chatter/features.auth/presentation/bloc/auth_event.dart';
+import 'package:chatter/features.auth/presentation/bloc/auth_state.dart';
 import 'package:chatter/features.auth/presentation/widgets/auth_button.dart';
 import 'package:chatter/features.auth/presentation/widgets/auth_input_field.dart';
 import 'package:chatter/features.auth/presentation/widgets/login_prompt.dart';
 import 'package:flutter/material.dart';
 import 'package:chatter/core/theme.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -15,11 +19,13 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
-  void _showInputValues() {
-    String email = _emailController.text;
-    String password = _passwordController.text;
-
-    print("Email : $email - Password :$password");
+  void _onLogin() {
+    BlocProvider.of<AuthBloc>(context).add(
+      LoginEvent(
+        email: _emailController.text,
+        password: _passwordController.text,
+      ),
+    );
   }
 
   @override
@@ -52,12 +58,30 @@ class _LoginPageState extends State<LoginPage> {
                 isPassword: true,
               ),
               SizedBox(height: 20),
-              AuthButton(text: 'Login', onPressed: () {}),
+              BlocConsumer<AuthBloc, AuthState>(
+                builder: (context, state) {
+                  if (state is AuthLoading) {
+                    return Center(child: CircularProgressIndicator());
+                  }
+                  return AuthButton(text: 'Login', onPressed: _onLogin);
+                },
+                listener: (context, state) {
+                  if (state is AuthSuccess) {
+                    Navigator.pushNamed(context, '/message');
+                  } else if (state is AuthFailure) {
+                    ScaffoldMessenger.of(
+                      context,
+                    ).showSnackBar(SnackBar(content: Text(state.error)));
+                  }
+                },
+              ),
               SizedBox(height: 20),
               LoginPrompt(
                 title: 'New User? ',
                 subtitle: 'Click here to register',
-                onTap: () {},
+                onTap: () {
+                  Navigator.pushNamed(context, '/register');
+                },
               ),
             ],
           ),
