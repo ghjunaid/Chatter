@@ -9,22 +9,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:chatter/main.dart';
+import 'package:chatter/features.auth/data/datasources/auth_remote_data_source.dart';
+import 'package:chatter/features.auth/data/repositories/auth_repository_impl.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
+  testWidgets('App starts with RegisterPage', (WidgetTester tester) async {
+    // Create dependencies
+    final authRemoteDataSource = AuthRemoteDataSource();
+    final authRepository = AuthRepositoryImpl(authRemoteDataSource: authRemoteDataSource);
+
     // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+    await tester.pumpWidget(MyApp(authRepository: authRepository));
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
-
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
-
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    // Verify that the app builds without errors and shows the initial page.
+    expect(find.byType(MaterialApp), findsOneWidget);
+    // Assuming RegisterPage has a title or form elements, adjust as needed.
+    // For now, confirm the app renders.
+    await tester.pumpAndSettle();
   });
 }

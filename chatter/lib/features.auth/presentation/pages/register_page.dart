@@ -1,8 +1,12 @@
+import 'package:chatter/features.auth/presentation/bloc/auth_bloc.dart';
+import 'package:chatter/features.auth/presentation/bloc/auth_event.dart';
+import 'package:chatter/features.auth/presentation/bloc/auth_state.dart';
 import 'package:chatter/features.auth/presentation/widgets/auth_button.dart';
 import 'package:chatter/features.auth/presentation/widgets/auth_input_field.dart';
 import 'package:chatter/features.auth/presentation/widgets/login_prompt.dart';
 import 'package:flutter/material.dart';
 import 'package:chatter/core/theme.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -30,6 +34,16 @@ class _RegisterPageState extends State<RegisterPage> {
     _emailController.dispose();
     _passwordController.dispose();
     super.dispose();
+  }
+
+  void _onRegister() {
+    BlocProvider.of<AuthBloc>(context).add(
+      RegisterEvent(
+        username: _usernameController.text,
+        email: _emailController.text,
+        password: _passwordController.text,
+      ),
+    );
   }
 
   @override
@@ -61,7 +75,23 @@ class _RegisterPageState extends State<RegisterPage> {
                 isPassword: true,
               ),
               SizedBox(height: 20),
-              AuthButton(text: 'Register', onPressed: () {}),
+              BlocConsumer<AuthBloc, AuthState>(
+                builder: (context, state) {
+                  if (state is AuthLoading) {
+                    return Center(child: CircularProgressIndicator());
+                  }
+                  return AuthButton(text: 'Register', onPressed: _onRegister);
+                },
+                listener: (context, state) {
+                  if (state is AuthSuccess) {
+                    Navigator.pushNamed(context, '/login');
+                  } else if (state is AuthFailure) {
+                    ScaffoldMessenger.of(
+                      context,
+                    ).showSnackBar(SnackBar(content: Text(state.error)));
+                  }
+                },
+              ),
               SizedBox(height: 20),
               LoginPrompt(
                 title: 'Already have an account? ',
