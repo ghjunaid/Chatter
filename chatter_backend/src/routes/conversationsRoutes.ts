@@ -15,19 +15,20 @@ router.get('/', verifyToken, async (req: Request, res: Response) => {
             `
             SELECT c.id AS conversation_id, u.username AS participant_name, m.content AS last_message, m.created_at AS last_message_time
             FROM conversations c
-            JOIN USER u ON (u.id = c.participant_two AND u.id != $1)
-            LEFT JOIN LATERAL {
-            SELECT content, created_at
-            FROM messages
-            WHERE conversation_id = c.id
-            ORDER BY created_at DESC
-            LIMIT 1
-            } m ON true
-            WHERE c.participant_one = $1 OR c.participant_two = $1
-            ORDER BY m.created_at DESC
+            JOIN users u ON u.id = CASE WHEN c.participate_one = $1 THEN c.participate_two ELSE c.participate_one END
+            LEFT JOIN LATERAL (
+                SELECT content, created_at
+                FROM messages
+                WHERE conversation_id = c.id
+                ORDER BY created_at DESC
+                LIMIT 1
+            ) m ON true
+            WHERE c.participate_one = $1 OR c.participate_two = $1
+            ORDER BY COALESCE(m.created_at, c.created_at) DESC
             `,
             [userId]
-        )
+        );
+        res.json(result.rows);
     } catch (error) {
         res.status(500).json({error: 'Failed to fetch conversation'})
     }
