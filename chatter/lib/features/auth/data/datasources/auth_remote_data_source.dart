@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:chatter/features.auth/data/models/user_model.dart';
+import 'package:chatter/features/auth/data/models/user_model.dart';
 import 'package:http/http.dart' as http;
 
 class AuthRemoteDataSource {

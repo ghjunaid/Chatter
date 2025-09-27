@@ -1,9 +1,9 @@
-import 'package:chatter/features.auth/presentation/bloc/auth_bloc.dart';
-import 'package:chatter/features.auth/presentation/bloc/auth_event.dart';
-import 'package:chatter/features.auth/presentation/bloc/auth_state.dart';
-import 'package:chatter/features.auth/presentation/widgets/auth_button.dart';
-import 'package:chatter/features.auth/presentation/widgets/auth_input_field.dart';
-import 'package:chatter/features.auth/presentation/widgets/login_prompt.dart';
+import 'package:chatter/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:chatter/features/auth/presentation/bloc/auth_event.dart';
+import 'package:chatter/features/auth/presentation/bloc/auth_state.dart';
+import 'package:chatter/features/auth/presentation/widgets/auth_button.dart';
+import 'package:chatter/features/auth/presentation/widgets/auth_input_field.dart';
+import 'package:chatter/features/auth/presentation/widgets/login_prompt.dart';
 import 'package:flutter/material.dart';
 import 'package:chatter/core/theme.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

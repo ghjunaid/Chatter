@@ -1,13 +1,13 @@
 import 'package:chatter/chat_page.dart';
 import 'package:chatter/core/theme.dart';
-import 'package:chatter/features.auth/data/datasources/auth_remote_data_source.dart';
-import 'package:chatter/features.auth/data/repositories/auth_repository_impl.dart';
-import 'package:chatter/features.auth/domain/usecases/login_use_case.dart';
-import 'package:chatter/features.auth/domain/usecases/register_use_case.dart';
-import 'package:chatter/features.auth/presentation/bloc/auth_bloc.dart';
-import 'package:chatter/features.auth/presentation/pages/login_page.dart';
+import 'package:chatter/features/auth/data/datasources/auth_remote_data_source.dart';
+import 'package:chatter/features/auth/data/repositories/auth_repository_impl.dart';
+import 'package:chatter/features/auth/domain/usecases/login_use_case.dart';
+import 'package:chatter/features/auth/domain/usecases/register_use_case.dart';
+import 'package:chatter/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:chatter/features/auth/presentation/pages/login_page.dart';
 import 'package:chatter/message_page.dart';
-import 'package:chatter/features.auth/presentation/pages/register_page.dart';
+import 'package:chatter/features/auth/presentation/pages/register_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

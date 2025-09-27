@@ -1,6 +1,6 @@
-import 'package:chatter/features.auth/data/datasources/auth_remote_data_source.dart';
-import 'package:chatter/features.auth/domain/entities/user_entity.dart';
-import 'package:chatter/features.auth/domain/repositories/auth_repository.dart';
+import 'package:chatter/features/auth/data/datasources/auth_remote_data_source.dart';
+import 'package:chatter/features/auth/domain/entities/user_entity.dart';
+import 'package:chatter/features/auth/domain/repositories/auth_repository.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
   final AuthRemoteDataSource authRemoteDataSource;

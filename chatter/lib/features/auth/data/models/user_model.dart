@@ -1,4 +1,4 @@
-import 'package:chatter/features.auth/domain/entities/user_entity.dart';
+import 'package:chatter/features/auth/domain/entities/user_entity.dart';
 
 class UserModel extends UserEntity {
   UserModel({

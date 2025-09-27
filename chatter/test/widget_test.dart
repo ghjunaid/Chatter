@@ -9,8 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:chatter/main.dart';
-import 'package:chatter/features.auth/data/datasources/auth_remote_data_source.dart';
-import 'package:chatter/features.auth/data/repositories/auth_repository_impl.dart';
+import 'package:chatter/features/auth/data/datasources/auth_remote_data_source.dart';
+import 'package:chatter/features/auth/data/repositories/auth_repository_impl.dart';
 
 void main() {
   testWidgets('App starts with RegisterPage', (WidgetTester tester) async {
