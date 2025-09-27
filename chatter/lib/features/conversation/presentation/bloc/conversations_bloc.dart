@@ -6,7 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class ConversationsBloc extends Bloc<ConversationsEvents, ConversationsState> {
   final FetchConversationsUseCase fetchConversationsUseCase;
 
-  ConversationsBloc(this.fetchConversationsUseCase)
+  ConversationsBloc({required this.fetchConversationsUseCase})
     : super(ConversationsInitial()) {
     on<FetchConversations>(_onFetchConversations);
   }

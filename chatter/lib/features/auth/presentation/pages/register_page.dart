@@ -97,7 +97,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 title: 'Already have an account? ',
                 subtitle: 'Click here to login',
                 onTap: () {
-                  Navigator.pop(context);
+                  Navigator.pushNamed(context, '/login');
                 },
               ),
             ],

@@ -3,11 +3,11 @@ import 'package:chatter/features/conversation/domain/entities/conversation_entit
 import 'package:chatter/features/conversation/domain/repositories/conversations_repository.dart';
 
 class ConversationsRepositoryImpl implements ConversationsRepository {
-  final ConversationsRemoteDataSource remoteDataSource;
+  final ConversationsRemoteDataSource conversationsRemoteDataSource;
 
-  ConversationsRepositoryImpl({required this.remoteDataSource});
+  ConversationsRepositoryImpl({required this.conversationsRemoteDataSource});
   @override
   Future<List<ConversationEntity>> fetchConversations() async {
-    return await remoteDataSource.fetchConversations();
+    return await conversationsRemoteDataSource.fetchConversations();
   }
 }

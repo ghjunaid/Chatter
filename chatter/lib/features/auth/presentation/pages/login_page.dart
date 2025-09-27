@@ -67,7 +67,7 @@ class _LoginPageState extends State<LoginPage> {
                 },
                 listener: (context, state) {
                   if (state is AuthSuccess) {
-                    Navigator.pushNamed(context, '/message');
+                    Navigator.pushNamedAndRemoveUntil(context, '/conversationPage', (route)=> false);
                   } else if (state is AuthFailure) {
                     ScaffoldMessenger.of(
                       context,
