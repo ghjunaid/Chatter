@@ -1,9 +1,10 @@
+import 'package:chatter/features/conversation/domain/usecases/fetch_conversations_use_case.dart';
 import 'package:chatter/features/conversation/presentation/bloc/conversations_events.dart';
 import 'package:chatter/features/conversation/presentation/bloc/conversations_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ConversationsBloc extends Bloc<ConversationsEvents, ConversationsState> {
-  final FetchConversations fetchConversationsUseCase;
+  final FetchConversationsUseCase fetchConversationsUseCase;
 
   ConversationsBloc(this.fetchConversationsUseCase)
     : super(ConversationsInitial()) {
