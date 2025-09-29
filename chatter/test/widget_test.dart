@@ -11,6 +11,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:chatter/main.dart';
 import 'package:chatter/features/auth/data/datasources/auth_remote_data_source.dart';
 import 'package:chatter/features/auth/data/repositories/auth_repository_impl.dart';
+import 'package:chatter/features/chat/data/datasources/message_remote_data_source.dart';
+import 'package:chatter/features/chat/data/repositories/message_repository_impl.dart';
 import 'package:chatter/features/conversation/data/datasource/conversations_remote_data_source.dart';
 import 'package:chatter/features/conversation/data/repositories/conversations_repository_impl.dart';
 
@@ -21,9 +23,15 @@ void main() {
     final authRepository = AuthRepositoryImpl(authRemoteDataSource: authRemoteDataSource);
     final conversationsRemoteDataSource = ConversationsRemoteDataSource();
     final conversationsRepository = ConversationsRepositoryImpl(conversationsRemoteDataSource: conversationsRemoteDataSource);
+    final messageRemoteDataSource = MessageRemoteDataSource();
+    final messagesRepository = MessagesRepositoryImpl(remoteDataSource: messageRemoteDataSource);
 
     // Build our app and trigger a frame.
-    await tester.pumpWidget(MyApp(authRepository: authRepository, conversationsRepository: conversationsRepository));
+    await tester.pumpWidget(MyApp(
+      authRepository: authRepository,
+      conversationsRepository: conversationsRepository,
+      messagesRepository: messagesRepository,
+    ));
 
     // Verify that the app builds without errors and shows the initial page.
     expect(find.byType(MaterialApp), findsOneWidget);

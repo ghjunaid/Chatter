@@ -3,6 +3,8 @@ import pool from "../models/db";
 
 export const fetchAllMessageByConversationId = async (req: Request, res: Response) => {
     const { conversationId } = req.params;
+    console.log('Fetching messages for conversationId:', conversationId);
+    console.log('User ID from token:', req.user?.id); // Assuming verifyToken adds req.user
 
     try{
         const result = await pool.query(
@@ -14,8 +16,10 @@ export const fetchAllMessageByConversationId = async (req: Request, res: Respons
             `,
             [conversationId]
         );
+        console.log('Query result rows:', result.rows.length);
         res.json(result.rows);
     } catch(err){
+        console.error('DB Error fetching messages:', err);
         res.status(500).json({error: 'Failed to fetch messages'});
     }
 }

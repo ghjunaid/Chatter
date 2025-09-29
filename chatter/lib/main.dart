@@ -1,4 +1,8 @@
-import 'package:chatter/chat_page.dart';
+import 'package:chatter/features/chat/data/datasources/message_remote_data_source.dart';
+import 'package:chatter/features/chat/data/repositories/message_repository_impl.dart';
+import 'package:chatter/features/chat/domain/usecases/fetch_messages_use_case.dart';
+import 'package:chatter/features/chat/presentation/bloc/chat_bloc.dart';
+import 'package:chatter/features/chat/presentation/pages/chat_page.dart';
 import 'package:chatter/core/theme.dart';
 import 'package:chatter/features/auth/data/datasources/auth_remote_data_source.dart';
 import 'package:chatter/features/auth/data/repositories/auth_repository_impl.dart';
@@ -23,14 +27,29 @@ void main() {
   final conversationsRepository = ConversationsRepositoryImpl(
     conversationsRemoteDataSource: ConversationsRemoteDataSource(),
   );
-  runApp(MyApp(authRepository: authRepository, conversationsRepository: conversationsRepository,));
+  final messagesRepository = MessagesRepositoryImpl(
+    remoteDataSource: MessageRemoteDataSource(),
+  );
+  runApp(
+    MyApp(
+      authRepository: authRepository,
+      conversationsRepository: conversationsRepository,
+      messagesRepository: messagesRepository,
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
   final AuthRepositoryImpl authRepository;
   final ConversationsRepositoryImpl conversationsRepository;
+  final MessagesRepositoryImpl messagesRepository;
 
-  const MyApp({super.key, required this.authRepository, required this.conversationsRepository});
+  const MyApp({
+    super.key,
+    required this.authRepository,
+    required this.conversationsRepository,
+    required this.messagesRepository,
+  });
 
   // This widget is the root of your application.
   @override
@@ -45,7 +64,16 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (_) => ConversationsBloc(
-            fetchConversationsUseCase: FetchConversationsUseCase(conversationsRepository)
+            fetchConversationsUseCase: FetchConversationsUseCase(
+              conversationsRepository,
+            ),
+          ),
+        ),
+        BlocProvider(
+          create: (_) => ChatBloc(
+            fetchMessagesUseCase: FetchMessagesUseCase(
+              messagesRepository: messagesRepository,
+            ),
           ),
         ),
       ],
@@ -53,11 +81,10 @@ class MyApp extends StatelessWidget {
         title: 'Flutter Demo',
         theme: AppTheme.darkTheme,
         debugShowCheckedModeBanner: false,
-        home: RegisterPage(),
+        home: LoginPage(),
         routes: {
           '/login': (_) => LoginPage(),
           '/register': (_) => RegisterPage(),
-          '/chat': (_) => ChatPage(),
           '/conversationPage': (_) => ConversationsPage(),
         },
       ),
