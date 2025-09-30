@@ -1,3 +1,4 @@
+import 'package:chatter/core/socket_service.dart';
 import 'package:chatter/features/chat/data/datasources/message_remote_data_source.dart';
 import 'package:chatter/features/chat/data/repositories/message_repository_impl.dart';
 import 'package:chatter/features/chat/domain/usecases/fetch_messages_use_case.dart';
@@ -20,7 +21,11 @@ import 'package:chatter/features/auth/presentation/pages/register_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final socketService = SocketService();
+  await socketService.initSocket();
+  
   final authRepository = AuthRepositoryImpl(
     authRemoteDataSource: AuthRemoteDataSource(),
   );

@@ -69,6 +69,7 @@ class _ChatPageState extends State<ChatPage> {
         ),
         backgroundColor: Colors.transparent,
         elevation: 0,
+        iconTheme: IconThemeData(color: Colors.white),
         actions: [
           IconButton(
             onPressed: () {},
