@@ -20,13 +20,6 @@ class _RegisterPageState extends State<RegisterPage> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
-  void _showInputValues() {
-    String username = _usernameController.text;
-    String email = _emailController.text;
-    String password = _passwordController.text;
-
-    print("Username : $username - Email : $email - Password :$password");
-  }
 
   @override
   void dispose() {

@@ -36,6 +36,15 @@ class AuthRemoteDataSource {
 
     print(response.body);
 
-    return UserModel.fromJson(jsonDecode(response.body)['user']);
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      final data = jsonDecode(response.body);
+      if (data['user'] != null) {
+        return UserModel.fromJson(data['user']);
+      } else {
+        throw Exception('No user data in response: ${response.body}');
+      }
+    } else {
+      throw Exception('Registration failed: ${response.statusCode} - ${response.body}');
+    }
   }
 }

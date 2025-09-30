@@ -1,0 +1,4 @@
+- [ ] Update auth_remote_data_source.dart to check HTTP response status and handle JSON parsing safely.
+- [ ] Update auth_bloc.dart to propagate specific error messages and fix typo in success message.
+- [ ] Update register_page.dart for better error display (already handles state.error in SnackBar).
+- [ ] Test the registration flow to ensure no failure message and successful navigation.
